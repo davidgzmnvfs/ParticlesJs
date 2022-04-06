@@ -36,7 +36,8 @@ export default class Character {
 
     update() {
         // if (this.followingMouse == true) {
-            this.setDirection(this.mousePos);
+        // this.setDirection(this.mousePos);
+        this.setDirectionDetailed(this.mousePos);
         // }
         this.UpdateVelocity();
         this.ClampMaxSpeed();
@@ -50,6 +51,16 @@ export default class Character {
         this.direction.x = this.deltaX / Math.abs(this.deltaX);
         this.direction.y = this.deltaY / Math.abs(this.deltaY);
         console.log(`${this.deltaX / Math.abs(this.deltaX)}:${this.deltaY / Math.abs(this.deltaY)}`)
+    }
+    setDirectionDetailed({ x: mouseX, y: mouseY }){
+        let deltaX = mouseX - this.position.x;
+        let deltaY = mouseY - this.position.y;
+        let deltaXNormalized = deltaX / Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+        let deltaYNormalized = deltaY / Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+        this.direction={
+            x: deltaXNormalized,
+            y:deltaYNormalized  
+        }
     }
     UpdatePosition() {
         this.position.x += this.velocity.x;
