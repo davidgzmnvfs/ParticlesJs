@@ -6,6 +6,7 @@ class App {
 
     constructor() {
         this.character = new Character(500, 500);
+        this.charCount = 1;
         this.div = document.querySelector("#character");
         this.isRunning = false;
         this.counter = 0;
@@ -40,6 +41,13 @@ class App {
                     break;
             }
         });
+
+        //TODO: spawn new particles on click
+        // document.addEventListener("click", e => {
+        //     this.charCount ++;
+        //     let char = new Character(e.clientX,e.clientY);
+        //     console.log(char);
+        // })
     }
     Update = () => {
     };
