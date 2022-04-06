@@ -13,6 +13,10 @@ export default class Character {
             x: 0,
             y: 0
         }
+        this.gravity = {
+            x:0,
+            y:.05
+        }
         this.maxSpeed = 10;
         this.acceleration = .1;
         this.counter = 0;
@@ -70,6 +74,7 @@ export default class Character {
     UpdateVelocity() {
         this.velocity.x += this.direction.x * this.acceleration;
         this.velocity.y += this.direction.y * this.acceleration;
+        // this.velocity.y += this.direction.y * this.acceleration + this.gravity.y;
     }
 
     ClampMaxSpeed() {
