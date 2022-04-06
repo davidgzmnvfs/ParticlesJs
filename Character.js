@@ -27,13 +27,32 @@ export default class Character {
     turnDown = () => {this.direction.y = 1}
     
     update = () => {
-        // this.speed += this.acceleration;
-        this.velocity.x += this.direction.x * this.acceleration;
-        this.velocity.y += this.direction.y * this.acceleration;
+        this.UpdateVelocity();
+        this.ClampMaxSpeed();
+        this.HandleWrapping();
+        this.UpdatePosition();
+    };
+
+    UpdatePosition() {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
-        this.HandleWrapping();
-    };
+    }
+
+    UpdateVelocity() {
+        this.velocity.x += this.direction.x * this.acceleration;
+        this.velocity.y += this.direction.y * this.acceleration;
+    }
+
+    ClampMaxSpeed() {
+        if (this.velocity.x > this.maxSpeed)
+            this.velocity.x = this.maxSpeed;
+        if (this.velocity.x < this.maxSpeed * -1)
+            this.velocity.x = this.maxSpeed * -1;
+        if (this.velocity.y > this.maxSpeed)
+            this.velocity.y = this.maxSpeed;
+        if (this.velocity.y < this.maxSpeed * -1)
+            this.velocity.y = this.maxSpeed * -1;
+    }
 
     HandleWrapping() {
         if (this.position.x > window.innerWidth) {

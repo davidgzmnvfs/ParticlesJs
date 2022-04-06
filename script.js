@@ -44,10 +44,8 @@ class App {
     Update = () => {
     };
     UpdateInterval = () => {
-        console.log("Updating");
         this.character.update();
         this.div.setAttribute('style', `left:${this.character.position.x}px; top:${this.character.position.y}px`);
-        // requestAnimationFrame(this.character.update);
     };
 }
 console.log(Document);
