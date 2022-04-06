@@ -50,7 +50,6 @@ export default class Character {
 
     }
     Draw(){
-
         this.div.setAttribute('style', 
         `left:${this.position.x}px; 
         top:${this.position.y}px; 
@@ -59,28 +58,28 @@ export default class Character {
         height: ${this.size}px;`
         );
     }
-
     setDirection({ x: mouseX, y: mouseY }) {
         this.deltaX = mouseX - this.position.x;
         this.deltaY = mouseY - this.position.y;
         this.direction.x = this.deltaX / Math.abs(this.deltaX);
         this.direction.y = this.deltaY / Math.abs(this.deltaY);
-        console.log(`${this.deltaX / Math.abs(this.deltaX)}:${this.deltaY / Math.abs(this.deltaY)}`)
     }
     setDirectionDetailed({ x: mouseX, y: mouseY }){
         let deltaX = mouseX - this.position.x;
         let deltaY = mouseY - this.position.y;
-        let deltaXNormalized = deltaX / Math.sqrt(deltaX*deltaX + deltaY*deltaY);
-        let deltaYNormalized = deltaY / Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+        let magnitude = Math.sqrt(deltaX*deltaX + deltaY*deltaY)
+        let deltaXNormalized = deltaX / magnitude;
+        let deltaYNormalized = deltaY / magnitude;
         this.direction={
             x: deltaXNormalized,
-            y:deltaYNormalized  
+            y: deltaYNormalized  
         }
     }
     UpdatePosition() {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
-
+        // this.position.x = this.position.x.toFixed(4);
+        // this.position.y = this.position.y.toFixed(4);
     }
     UpdateVelocity() {
         this.velocity.x += this.direction.x * this.acceleration;

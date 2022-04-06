@@ -16,7 +16,6 @@ class App {
         this.div.setAttribute('style', `left:${this.character.position.x}px; top:${this.character.position.y}px`);
 
         document.addEventListener("keydown", event => {
-            console.log(event.key);
             switch (event.key) {
                 case "Enter":
                     console.log("Pressed enter");
