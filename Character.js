@@ -18,7 +18,7 @@ export default class Character {
             y:.07
         }
         this.maxSpeed = 10;
-        this.acceleration = .1;
+        this.acceleration = .5;
         this.counter = 0;
         this.mousePos = {
             mouseX: 0,
@@ -69,6 +69,7 @@ export default class Character {
     UpdatePosition() {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
+
     }
 
     UpdateVelocity() {
@@ -87,13 +88,13 @@ export default class Character {
     HandleWrapping() {
         if (this.position.x > window.innerWidth) {
             this.position.x = 0;
-        } else if (this.position.x < 0 - 100) {
+        } else if (this.position.x < 0 - 50) {
             this.position.x = window.innerWidth;
         }
 
         if (this.position.y > window.innerHeight) {
             this.position.y = 0;
-        } else if (this.position.y < 0 - 100) {
+        } else if (this.position.y < 0 - 50) {
             this.position.y = window.innerHeight;
         }
     }

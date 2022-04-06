@@ -12,4 +12,5 @@ body {
     left: 0px;
     background: white;
     border-radius: 50%;
+    transform: translate(-50px,-50px);
 }
