@@ -15,7 +15,7 @@ export default class Character {
         }
         this.gravity = {
             x:0,
-            y:.05
+            y:.07
         }
         this.maxSpeed = 10;
         this.acceleration = .1;
