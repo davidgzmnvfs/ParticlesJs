@@ -15,7 +15,7 @@ export default class Character {
         }
         this.gravity = {
             x:0,
-            y:.07
+            y:-.07
         }
         this.size = 100 - 25 + (Math.random()*50)
         this.div = div;
@@ -83,8 +83,8 @@ export default class Character {
     }
     UpdateVelocity() {
         this.velocity.x += this.direction.x * this.acceleration;
-        this.velocity.y += this.direction.y * this.acceleration;
-        // this.velocity.y += this.direction.y * this.acceleration + this.gravity.y;
+        // this.velocity.y += this.direction.y * this.acceleration;
+        this.velocity.y += this.direction.y * this.acceleration + this.gravity.y;
     }
     ClampMaxSpeed() {
         if (this.velocity.x > this.maxSpeed) { this.velocity.x = this.maxSpeed; }

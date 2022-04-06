@@ -27,11 +27,22 @@ class App {
                     clearInterval(this.interval);
                     break;
 
-                case "R":
+                case "m":
                     this.characters.forEach(character => {
-                        character.followingMouse = !character.followingMouse;
-                        console.log(character.followingMouse);
+                        character.followingMouse = true;
+                        console.log("Following mouse");
                     })
+                    break;
+                case "f":
+                    this.characters.forEach(character => {
+                        character.followingMouse = false;
+                        console.log("Free");
+                    })
+                    break;
+                case "n":
+                    for (let i = 0; i < 500; i++) {
+                        this.CreateNewParticle(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+                    }
                     break;
                 case "ArrowUp":
                     // this.character.turnUp();
@@ -64,13 +75,8 @@ class App {
 
         //TODO: spawn new particles on click
         document.addEventListener("click", e => {
-            let div = document.createElement('div');
-            div.classList.add("character");
-            let char = new Character(e.clientX, e.clientY, div);
-            document.querySelector('body').append(div);
+            this.CreateNewParticle(e.clientX, e.clientY);
 
-            this.characters.push(char);
-            console.log(char);
         })
     }
     Update = () => {
@@ -81,6 +87,14 @@ class App {
         });
         // this.character.update();
     };
+
+    CreateNewParticle(x, y) {
+        let div = document.createElement('div');
+        div.classList.add("character");
+        let char = new Character(x, y, div);
+        document.querySelector('body').append(div);
+        this.characters.push(char);
+    }
 }
 console.log(Document);
 const app = new App();
