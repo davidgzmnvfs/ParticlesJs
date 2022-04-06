@@ -5,11 +5,12 @@ import Character from "./Character.js"
 class App {
 
     constructor() {
-        this.character = new Character(0, 0);
+        this.character = new Character(500, 500);
         this.div = document.querySelector("#character");
         this.isRunning = false;
         this.counter = 0;
         this.interval;
+        this.div.setAttribute('style', `left:${this.character.position.x}px; top:${this.character.position.y}px`);
 
         document.addEventListener("keydown", event => {
             switch (event.key) {
