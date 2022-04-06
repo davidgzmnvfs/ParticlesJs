@@ -69,6 +69,9 @@ export default class Character {
     UpdatePosition() {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
+        /**
+         * We are adding test stuffs
+         */
     }
 
     UpdateVelocity() {
