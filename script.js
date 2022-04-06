@@ -16,6 +16,7 @@ class App {
         this.div.setAttribute('style', `left:${this.character.position.x}px; top:${this.character.position.y}px`);
 
         document.addEventListener("keydown", event => {
+            console.log(event.key);
             switch (event.key) {
                 case "Enter":
                     console.log("Pressed enter");
@@ -27,6 +28,12 @@ class App {
                     clearInterval(this.interval);
                     break;
 
+                case "R":
+                    this.characters.forEach(character => {
+                        character.followingMouse = !character.followingMouse;
+                        console.log(character.followingMouse);
+                    })
+                    break;
                 case "ArrowUp":
                     // this.character.turnUp();
                     this.characters.forEach(character => {

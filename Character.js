@@ -19,7 +19,7 @@ export default class Character {
         }
         this.size = 100 - 25 + (Math.random()*50)
         this.div = div;
-        this.maxSpeed = Math.random()*10;
+        this.maxSpeed = 3 + Math.random()*7;
         this.acceleration = Math.random()/2;
         this.counter = 0;
         this.mousePos = {
@@ -41,7 +41,7 @@ export default class Character {
     turnDown = () => { this.direction.y = 1 }
 
     update() {
-        // this.setDirectionDetailed(this.mousePos);
+        if(this.followingMouse){this.setDirectionDetailed(this.mousePos);}
         this.UpdateVelocity();
         this.ClampMaxSpeed();
         this.HandleWrapping();
@@ -50,13 +50,13 @@ export default class Character {
 
     }
     Draw(){
+
         this.div.setAttribute('style', 
         `left:${this.position.x}px; 
         top:${this.position.y}px; 
+        transform: translate(${this.size * -1 * .5}px,${this.size * -1 * .5}px);
         width: ${this.size}px; 
-        height: ${this.size}px; 
-        background: rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255},${Math.random()});
-        transform: translate(${this.size *-1}px,${this.size *-1}px)`
+        height: ${this.size}px;`
         );
     }
 
