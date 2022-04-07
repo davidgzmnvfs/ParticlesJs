@@ -5,7 +5,7 @@ export default class Particle {
             x: x,
             y: y
         }
-        this.initialPosition = {...this.position};
+        this.initialPosition = {x:x,y:y};
         this.velocity = {
             x: -1 * Math.random()*10 + 5,
             y: -1 * Math.random()*10 - 5
@@ -23,13 +23,13 @@ export default class Particle {
     }
 
     Reset = () => {
-        this.position = this.initialPosition;
+        this.lifespan = 100;
+        this.position = {...this.initialPosition};
         this.Draw();
         this.velocity = {
             x: -1 * Math.random()*10 + 5,
             y: -1 * Math.random()*10 - 5
         }
-        this.lifespan = 100;
     }
 
     Update = () => {

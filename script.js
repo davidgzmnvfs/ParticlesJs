@@ -6,16 +6,8 @@ import Emitter from "./Emitter.js";
 class App {
 
     constructor() {
-        this.div = document.querySelector("#Char1");
-        this.particle = new Particle(500, 500, this.div);
-        this.isRunning = true;
-        this.particles = [];
-        this.particles.push(this.particle);
-        this.emmiter = new Emitter(500,500);
-        // this.emmiter.StartEmitting();
-        this.interval = setInterval(this.UpdateInterval, 16);
-        this.interval = setInterval(this.emmiter.Run, 1000);
-
+        this.emitter = new Emitter(500,500);
+        // this.emmiter.StartEmitting();        
         document.addEventListener("keydown", event => {
             switch (event.key) {
                 case "Enter":
@@ -55,17 +47,18 @@ class App {
             emitter.EmitParticles();
         })
     }
-    Run = () => {
 
+    Run = () => {
+        this.emitter.StartEmitting();
+        // this.interval = setInterval(this.emmiter.Run, 1000/60);
     };
     UpdateInterval = () => {
         this.particles.forEach(particle => {
             particle.Update();
         });
-        // this.character.update();
     };
 
 }
 console.log(Document);
 const app = new App();
-// app.Update();
+app.Run();
