@@ -11,7 +11,10 @@ class App {
         this.isRunning = true;
         this.particles = [];
         this.particles.push(this.particle);
+        this.emmiter = new Emitter(500,500);
+        // this.emmiter.StartEmitting();
         this.interval = setInterval(this.UpdateInterval, 16);
+        this.interval = setInterval(this.emmiter.Run, 1000);
 
         document.addEventListener("keydown", event => {
             switch (event.key) {
@@ -42,42 +45,18 @@ class App {
                         this.CreateNewParticle(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
                     }
                     break;
-                case "ArrowUp":
-                    // this.character.turnUp();
-                    this.particles.forEach(character => {
-                        character.turnUp();
-                    })
-                    break;
-                case "ArrowDown":
-                    // this.character.turnDown();
-                    this.particles.forEach(character => {
-                        character.turnDown();
-                    })
-                    break;
-                case "ArrowLeft":
-                    // this.character.turnLeft();
-                    this.particles.forEach(character => {
-                        character.turnLeft();
-                    })
-                    break;
-                case "ArrowRight":
-                    // this.character.turnRight();
-                    this.particles.forEach(character => {
-                        character.turnRight();
-                    })
-                    break;
                 default:
                     break;
             }
         });
 
-        //TODO: spawn new particles on click
         document.addEventListener("click", e => {
             const emitter = new Emitter(e.clientX,e.clientY);
             emitter.EmitParticles();
         })
     }
-    Update = () => {
+    Run = () => {
+
     };
     UpdateInterval = () => {
         this.particles.forEach(particle => {
@@ -89,4 +68,4 @@ class App {
 }
 console.log(Document);
 const app = new App();
-app.Update();
+// app.Update();

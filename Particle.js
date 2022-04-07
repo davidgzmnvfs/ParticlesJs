@@ -5,31 +5,48 @@ export default class Particle {
             x: x,
             y: y
         }
+        this.initialPosition = {...this.position};
         this.velocity = {
-            x: 1 - Math.random()*2,
+            x: -1 * Math.random()*10 + 5,
             y: -1 * Math.random()*10 - 5
-        }
+        };
         this.wind = {
             x:0.005,
             y:0
-        }
-
+        };
+        this.lifespan = 100;
         this.gravity = 0.35;
-        this.size = 50 - 25 + (Math.random()*50)
+        this.size = 50 - 25 + (Math.random()*50);
         this.div = div;
         this.maxSpeed = 25;
+        this.interval = setInterval(this.Run,16);
     }
 
-    Update() {
+    Reset = () => {
+        this.position = this.initialPosition;
+        this.Draw();
+        this.velocity = {
+            x: -1 * Math.random()*10 + 5,
+            y: -1 * Math.random()*10 - 5
+        }
+        this.lifespan = 100;
+    }
+
+    Update = () => {
         //if(this.followingMouse){this.setDirectionDetailed(this.mousePos);}
+        this.lifespan -= 1;
         this.UpdateVelocity();
         this.ClampMaxSpeed();
         this.HandleWrapping();
         this.UpdatePosition();
         this.Draw();
 
+
     }
-    Draw(){
+    Run = () =>{
+        this.Update();
+    }
+    Draw = () =>{
         this.div.setAttribute('style', 
         `left:${this.position.x}px; 
         top:${this.position.y}px; 
@@ -38,21 +55,21 @@ export default class Particle {
         height: ${this.size}px;`
         );
     }
-    UpdatePosition() {
+    UpdatePosition = () => {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
     }
-    UpdateVelocity() {
+    UpdateVelocity = () => {
         this.velocity.x += this.wind.x;
         this.velocity.y += this.gravity + this.wind.y;
     }
-    ClampMaxSpeed() {
+    ClampMaxSpeed = () => {
         if (this.velocity.x > this.maxSpeed) { this.velocity.x = this.maxSpeed; }
         if (this.velocity.x < this.maxSpeed * -1) { this.velocity.x = this.maxSpeed * -1; }
         if (this.velocity.y > this.maxSpeed) { this.velocity.y = this.maxSpeed; }
         if (this.velocity.y < this.maxSpeed * -1) { this.velocity.y = this.maxSpeed * -1; }
     }
-    HandleWrapping() {
+    HandleWrapping = () => {
         if (this.position.x > window.innerWidth-(this.size/2)) {
             this.position.x = window.innerWidth-(this.size/2);
             this.velocity.x = 0;

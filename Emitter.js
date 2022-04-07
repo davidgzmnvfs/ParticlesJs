@@ -8,7 +8,6 @@ export default class Emitter {
             y: y
         }
         this.particles = [];
-        console.log("created emitter");
     }
 
     CreateNewParticle(x, y) {
@@ -18,15 +17,28 @@ export default class Emitter {
         document.querySelector('body').append(div);
         this.particles.push(particle);
     }
-    Update = () => {
+
+    UpdateParticles = () => {
         this.particles.forEach(particle => {
+            if(particle.lifespan <= 0 ){
+                console.log(particle.initialPosition);
+                particle.Reset();
+            }
             particle.Update();
         });
     }
-    EmitParticles() {
-        for (let i = 0; i < 10; i++) {
+
+    StartEmitting = () => {
+        this.interval = setInterval(this.EmitParticles, 16);
+    }
+    
+    EmitParticles = () => {
+        for(let i = 0; i<1;i++){
             this.CreateNewParticle(this.position.x, this.position.y);
         }
-        this.interval = setInterval(this.Update , 16);
+    }
+    Run = () => {
+        this.EmitParticles();
+        this.UpdateParticles();
     }
 }
