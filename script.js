@@ -6,8 +6,7 @@ import Emitter from "./Emitter.js";
 class App {
 
     constructor() {
-        this.emitter = new Emitter(500,500);
-        // this.emmiter.StartEmitting();        
+        this.emitters = [];     
         document.addEventListener("keydown", event => {
             switch (event.key) {
                 case "Enter":
@@ -43,19 +42,18 @@ class App {
         });
 
         document.addEventListener("click", e => {
+            // TODO: Stop old emitters
             const emitter = new Emitter(e.clientX,e.clientY);
-            emitter.EmitParticles();
+            this.emitters.push(emitter);
+            this.Run();
         })
     }
 
     Run = () => {
-        this.emitter.StartEmitting();
+        this.emitters.forEach(emitter => {
+            emitter.StartEmitting();
+        })
         // this.interval = setInterval(this.emmiter.Run, 1000/60);
-    };
-    UpdateInterval = () => {
-        this.particles.forEach(particle => {
-            particle.Update();
-        });
     };
 
 }

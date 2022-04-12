@@ -10,7 +10,7 @@ export default class Emitter {
         this.particles = [];
         this.emissionInterval;
         this.count = 0;
-        this.maxParticles = 120;
+        this.maxParticles = 60;
     }
 
     CreateNewParticle(x, y) {
